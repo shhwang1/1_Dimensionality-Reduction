@@ -134,6 +134,47 @@ Calculate p_value through the 'statsmodel' package and determine whether to sele
 
 ### Analysis
 
-![image](https://user-images.githubusercontent.com/115224653/194545045-6d1ed8f2-782c-49d7-9405-775db3a042fe.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194545328-3178119f-1829-4ef6-8878-3305ede7c2c2.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194545665-c1f44ed6-3e45-4af8-97ed-b5ba84daff97.png"></p>
 
+In all four datasets, the adjusted-r-square value increased as the step went through.   
+WineQuality and PersonalLoan datasets are judged to have no meaning in selecting variables as the increasing trend becomes insignificant when passing a specific step.
+___
+### 2. Backward selection(elimination)
+Backward elimination is a way of eliminating meaningless variables. In contrast, it starts with a model with all the variables and move toward a backward that reduces the variables one by one. If you remove one variable, it repeats this process until a significant performance degradation occurs. Below is an image showing the process of reverse removal.
 
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194546699-e94c37d7-024e-446c-bacd-55556f56a91b.png"></p>
+<p align="center">https://quantifyinghealth.com/ Oct 07, 2022</p>
+
+### Python Code
+Backward elimination does not differ significantly in code compared to forward selection. It starts with all variables, and compares the variable with the smallest p-value with a threshold and removes it if it is lower.
+
+``` C
+initial_list = []
+threshold_out = 0.0
+feature_list = X_data.columns.tolist()
+
+for num in range(len(feature_list)-1):
+  model = sm.OLS(y_data, sm.add_constant(pd.DataFrame(X_data[included]))).fit(disp=0)
+  # use all coefs except intercept
+  pvalues = model.pvalues.iloc[1:] # P-value of each variable
+  worst_pval = pvalues.max()	# choose variable with best p-value
+  if worst_pval > threshold_out:
+      changed=True
+      worst_feature = pvalues.idxmax()
+      included.remove(worst_feature)
+
+  step += 1
+  steps.append(step)        
+  adj_r_squared = sm.OLS(y_data, sm.add_constant(pd.DataFrame(X_data[included]))).fit(disp=0).rsquared_adj
+  adj_r_squared_list.append(adj_r_squared)
+  sv_per_step.append(included.copy())
+``` 
+
+### Analysis
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194547954-87aeeda9-5482-4b59-9e33-a50c3ad1ae4b.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194548316-d3f7e8f7-1505-471e-b430-c64ea7864a60.png"></p>
+
+The initial Step with almost all variables shows a high adjusted-R-square value, but as the step passes, the number of variables decreases and the corresponding figure gradually decreases.   
+In particular, in the last step where only one or two variables remain, it can be seen that the corresponding figure decreases rapidly.   
