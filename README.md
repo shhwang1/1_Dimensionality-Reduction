@@ -4,11 +4,7 @@
 
 
 ## Purpose of Tutorial
-The purpose of this tutorial is for beginners studying Dimensionality Reduction.   
-   
-We also aim to improve our skills by explaining directly to someone.
-   
-From the variable selection method to the variable extraction method, we present a guide on the dimensional reduction method of the supervised method and the unsuperviced method.   
+In recent years, data scientists have been increasingly dealing with data that has very many variables. Accordingly, minimizing variables and extracting only key variables has become a very important task. Accordingly, we create a github page for beginners who learn about the dimension reduction method from the beginning. We also aim to improve our skills by explaining directly to someone. From the variable selection method to the variable extraction method, we present a guide on the dimensional reduction method of the supervised method and the unsuperviced method.   
    
 The table of contents is as follows.
 ___
