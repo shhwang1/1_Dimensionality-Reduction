@@ -118,8 +118,7 @@ We used the MDS of the manifold module in the sklearn package. It was formed as 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195006466-723958d1-b286-44af-aa6c-a9723c72540d.png"></p>
 
 Using Multi-Dimensional Scaling, PersonalLoan dataset determined that the two classes were relatively well clustered. However, the Wine Quality dataset and the Diabetes dataset did not cluster so well.   
-
-
+___
 ### 3. ISOMAP
 
 Isomap is an extension of multidimensional scaling (MDS) or principal component analysis (PCA) and a methodology that combines the two methods. Isomap algorithm seeks to effectively reduce dimensions using distance information that reflects the real features between the two data. The Isomap algorithm consists of three steps:
