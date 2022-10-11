@@ -279,3 +279,5 @@ def mutation(pop_after_cross, mutation_rate,n_feat):
 Looking at the results, it seems that abalone dataset and Diabetes dataset using RadialSVM are not fitted to the genetic algorithm. Therefore, for the two datasets, RadialSVM was excluded from 'models' and re-experimented.   
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194999133-8e521a26-099d-46cb-b1ea-b95adfbf628d.png"></p>   
+
+abalone dataset has very low performance of accuracy and GA-performance compared to other dataset. Personally, it is assumed that the performance will be relatively low because there are 29 classes(y-data) in the dataset.
