@@ -181,3 +181,42 @@ Genetic Algorithm is a meta-heuristic technique with a structure in which superi
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194995273-ec0b4a58-3a61-42e6-92a1-cbeba35f408e.png"></p> 
 
+``` C
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from random import randint
+from sklearn import svm
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn import metrics
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.model_selection import train_test_split
+import warnings
+
+classifiers = ['LinearSVM', 'RadialSVM', 
+               'Logistic',  'RandomForest', 
+               'AdaBoost',  'DecisionTree', 
+               'KNeighbors','GradientBoosting']
+
+models = [svm.SVC(kernel='linear'),
+          svm.SVC(kernel='rbf'),
+          LogisticRegression(max_iter = 1000),
+          RandomForestClassifier(n_estimators=200, random_state=0),
+          AdaBoostClassifier(random_state = 0),
+          DecisionTreeClassifier(random_state=0),
+          KNeighborsClassifier(),
+          GradientBoostingClassifier(random_state=0)]
+          
+score, best_model_index = acc_score(X_data, y_data)
+    print(score)
+    print('Starting Genetic-Algorithm with', classifiers[best_model_index])
+``` 
+First, the model with the highest accessibility is selected by using the options of the above 'models'. Accuracy for each model is calculated as shown in the results below. The following results are examples of 'Wine Quality' dataset.   
+
+![image](https://user-images.githubusercontent.com/115224653/194996083-610bda65-3f36-4b7b-9420-37ccdddc8745.png)
