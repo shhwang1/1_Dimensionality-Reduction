@@ -65,6 +65,8 @@ The code sets the threshold of 'cumulative explained variation' to 0.8, and dete
 The winequality dataset is the optimal points when six principal components and the diabetes dataset is the optimal points when five principal components, and the PersonalLoan dataset is the optimal point when eight principal components.
 
 
+![image](https://user-images.githubusercontent.com/115224653/195003434-1f0ab6f6-1e1d-4075-af90-e8ca11c470cd.png)
+![image](https://user-images.githubusercontent.com/115224653/195003501-00e7f01b-58c7-4367-b073-f451693e5957.png)
 ![image](https://user-images.githubusercontent.com/115224653/195003099-0cd11afc-6969-4599-a887-08087e056bc0.png)
 
 ___
