@@ -9,24 +9,51 @@ PCA is a technique of summarizing and abbreviating new variables made of a linea
 
 ### Python Code
 ``` C
-import pandas as pd
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
+def pca(args):
 
-variables = X_data.columns.tolist()
+    data = pd.read_csv(args.data_path + args.data_type)
+
+    X_data = data.iloc[:, :-1]
+    X_scaled = (X_data - X_data.mean(axis=0)) / X_data.std(axis=0)
+    y_data = data.iloc[:, -1]
+
+    pca = PCA()
+    X_pca = pca.fit_transform(X_scaled)
+
+    plot_variance(pca)
+
+    var_list = pca.explained_variance_ratio_
+    alpha = 0
+    pca_num = 0
+    while True:
+        for i in range(len(var_list)):
+            alpha += var_list[i]
+            if alpha >= 0.8:
+                pca_num = i+1
+                break
+        break
+        
+    print('Principal Components Number : ', pca_num)
+    print('PCA again with', pca_num, 'components....')
+
+    pca2 = PCA(n_components = pca_num)
+    X_pca_2 = pca2.fit_transform(X_scaled)
     
-forward_variables = []
+    labels = {
+    str(i): f"PC {i+1} ({var:.1f}%)"
+    for i, var in enumerate(pca2.explained_variance_ratio_ * 100)
+    }
 
-sl_enter = args.sl_enter # selection threshold
-sl_remove = args.sl_remove # elimination threshold
-sv_per_step = [] # Variables selected in each steps
-adj_r_squared_list = [] # Adjusted R-Square in each steps
-
-steps = []
-step = 0
+    fig = px.scatter_matrix(
+        X_pca,
+        labels=labels,
+        dimensions=range(pca_num),
+        color = y_data
+    )
+    fig.update_traces(diagonal_visible=False)
+    fig.show()
 ``` 
-sl_enter represents a threshold value of the p-value of the corresponding variable for selecting the variable.   
-Conversely, sl_remove represents a threshold of a p-value for removing the corresponding variable.   
+The code sets the threshold of 'cumulative explained variation' to 0.8, and determines the number of components when it exceeds 0.8, as the optimal point.   
 
 ``` C
 while len(variables) > 0:
