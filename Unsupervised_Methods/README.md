@@ -64,6 +64,9 @@ The code sets the threshold of 'cumulative explained variation' to 0.8, and dete
 
 The winequality dataset and the diabetes dataset are the optimal points when five principal components, and the PersonalLoan dataset is the optimal point when eight principal components.
 
+
+![image](https://user-images.githubusercontent.com/115224653/195003099-0cd11afc-6969-4599-a887-08087e056bc0.png)
+
 ___
 ### 2. Backward selection(elimination)
 Backward elimination is a way of eliminating meaningless variables. In contrast, it starts with a model with all the variables and move toward a backward that reduces the variables one by one. If you remove one variable, it repeats this process until a significant performance degradation occurs. Below is an image showing the process of reverse removal.
