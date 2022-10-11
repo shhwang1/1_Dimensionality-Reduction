@@ -237,6 +237,39 @@ def generations(logmodel, size, n_feat, n_parents, mutation_rate, n_gen, X_train
 
     return best_chromo, best_score
 ``` 
-It is the most basic generation code. The logmodel represents the model with the highest Accuracy, and size represents the number of chromosomes. mutation_rate represents the ratio of mutation, and n_gen represents the number of generations.
+It is the most basic generation code. The logmodel represents the model with the highest Accuracy, and size represents the number of chromosomes. mutation_rate represents the ratio of mutation, and n_gen represents the number of generations.   
+
+``` C
+def selection(pop_after_fit,n_parents):
+    population_nextgen = []
+    for i in range(n_parents):
+        population_nextgen.append(pop_after_fit[i])
+    return population_nextgen
+
+
+def crossover(pop_after_sel):
+    pop_nextgen = pop_after_sel
+    for i in range(0,len(pop_after_sel),2):
+        new_par = []
+        child_1 , child_2 = pop_nextgen[i] , pop_nextgen[i+1]
+        new_par = np.concatenate((child_1[:len(child_1)//2],child_2[len(child_1)//2:]))
+        pop_nextgen.append(new_par)
+    return pop_nextgen
+
+
+def mutation(pop_after_cross, mutation_rate,n_feat):   
+    mutation_range = int(mutation_rate*n_feat)
+    pop_next_gen = []
+    for n in range(0,len(pop_after_cross)):
+        chromo = pop_after_cross[n]
+        rand_posi = [] 
+        for i in range(0,mutation_range):
+            pos = randint(0,n_feat-1)
+            rand_posi.append(pos)
+        for j in rand_posi:
+            chromo[j] = not chromo[j]  
+        pop_next_gen.append(chromo)
+    return pop_next_gen
+```    
 
 ### Analysis 
