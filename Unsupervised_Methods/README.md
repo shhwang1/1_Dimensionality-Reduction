@@ -73,8 +73,7 @@ ___
 ### 2. Multi-Dimensional Scaling (MDS)
 Multi-Dimensional Scaling(MDS) addresses scale issues in input states that are essentially outputless. Given a distance matrix D defined between all points in the existing dimension space, the inner matrix B is used to create a coordinate system y space. The most important point of MDS is that it preserves the distance information between all points.   
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194546699-e94c37d7-024e-446c-bacd-55556f56a91b.png"></p>
-<p align="center">https://quantifyinghealth.com/ Oct 07, 2022</p>
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195004491-1a0631d5-7f61-4932-9f66-5e3cd14ba802.png"></p>
 
 ### Python Code
 Backward elimination does not differ significantly in code compared to forward selection. It starts with all variables, and compares the variable with the smallest p-value with a threshold and removes it if it is lower.
