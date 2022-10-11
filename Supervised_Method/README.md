@@ -113,3 +113,8 @@ for num in range(len(feature_list)-1):
 
 The initial Step with almost all variables shows a high adjusted-R-square value, but as the step passes, the number of variables decreases and the corresponding figure gradually decreases.   
 In particular, in the last step where only one or two variables remain, it can be seen that the corresponding figure decreases rapidly.   
+
+### 3. Stepwise Selection   
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194992685-38e77aa4-5a6d-44ff-bf3c-c6dcdcaa369c.png"></p>
+
