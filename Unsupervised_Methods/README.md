@@ -122,7 +122,14 @@ Using Multi-Dimensional Scaling, PersonalLoan dataset determined that the two cl
 
 ### 3. ISOMAP
 
-https://user-images.githubusercontent.com/115224653/195007612-63c37397-88ad-4ae8-ba13-f3555d57a6e9.png
+Isomap is an extension of multidimensional scaling (MDS) or principal component analysis (PCA) and a methodology that combines the two methods. Isomap algorithm seeks to effectively reduce dimensions using distance information that reflects the real features between the two data. The Isomap algorithm consists of three steps:
+
+1. Build adjacent neighbor graphs
+2. Calculate the shortest path graph between two points
+3. Building d-dimensional embeddings using the MDS methodology
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195007612-63c37397-88ad-4ae8-ba13-f3555d57a6e9.png"></p>
+
 
 Stepwise selection is a method of deleting variables that are not helpful or adding variables that improve the reference statistics the most among variables missing from the model. Stepwise selection, like Backward Selection, starts with all variables. We call the method of using a regression model using variables selected in Stepwise selection a 'stepwise regression analysis'.      
 
