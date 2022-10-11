@@ -58,7 +58,7 @@ The code sets the threshold of 'cumulative explained variation' to 0.8, and dete
 ### Analysis
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001263-f71d7c03-2fb4-4e36-a546-d9bfdfb96c39.png"></p>
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194545665-c1f44ed6-3e45-4af8-97ed-b5ba84daff97.png"></p>
+<p align="center"><img src="(https://user-images.githubusercontent.com/115224653/195001453-df4a03f0-6efa-41b6-b758-eb7498ee17b3.png"></p>
 
 In all four datasets, the adjusted-r-square value increased as the step went through.   
 WineQuality and PersonalLoan datasets are judged to have no meaning in selecting variables as the increasing trend becomes insignificant when passing a specific step.
