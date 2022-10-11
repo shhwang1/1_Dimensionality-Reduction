@@ -7,7 +7,7 @@
 PCA is a technique of summarizing and abbreviating new variables made of a linear combination of several highly correlated variables. PCA finds a new orthogonal basis while preserving the variance of the data as much as possible. After that, the sampling of the high-dimensional space is converted into a low-dimensional space with no linear association. Simply, the dimension is reduced by finding the axis of the data with the highest variance, which is the main component of PCA.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194999981-01e2c48c-7f02-4fb8-b63e-8ca43c7e9e2e.png" width="800" height="450"></p>
-<p align="center">https://quantifyinghealth.com/ Oct 07, 2022</p>
+
 
 ### Python Code
 ``` C
