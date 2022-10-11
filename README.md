@@ -18,7 +18,7 @@ ___
    
 #### 4. Genetic Algorithm   
 ___
-### Unsupervised Methods
+### Unsupervised Methods [Link](https://github.com/shhwang1/1_Dimensionality-Reduction/tree/main/Unsupervised_Methods)
 #### 1. Principal Component Analysis (PCA)   
    
 #### 2. Multi-Dimensional Scaling (MDS)   
