@@ -174,3 +174,10 @@ while len(variables) > 0:
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194993825-468b4277-1393-4898-b427-40406b188bc5.png"></p>  
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194994126-c1a7ab3f-8c2e-42df-aea1-daeb9cb1369f.png"></p> 
+
+### 4. Genetic Algorithm
+
+Genetic Algorithm is a meta-heuristic technique with a structure in which superior genes survive. This method first sets possible initial solutions for the problem. And we evaluate it and leave solutions that meet certain criteria. In addition, a new solution is created and repeated using the "crossover" process of creating a new solution by crossing two genes and the "mutation" of modifying existing genes. Although it cannot necessarily guarantee the optimal solution, it has the advantage of finding a close solution in a short time.   
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194995273-ec0b4a58-3a61-42e6-92a1-cbeba35f408e.png"></p> 
+
