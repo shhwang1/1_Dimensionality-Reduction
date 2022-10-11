@@ -1,6 +1,6 @@
 ## Unsupedvised Methods
 
-#### - As a result of the superimposed methods, abalone dataset does not fit well, so only 3 datasets are used in unsupervised methods.
+#### - As a result of the supervised methods, 'abalone dataset' does not fit well, so only 3 datasets are used in unsupervised methods.
 
 ### 1. Principal Component Analysis (PCA)
 
