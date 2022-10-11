@@ -225,3 +225,37 @@ def lle(args):
 t-Distributed Stochastic Neighbor Embedding(t-SNE) is one of manifold learning and aims at visualizing complex data. Visualize high-dimensional data by shrinking it to two or three dimensions. t-SNE is characterized by utilizing the t-distribution rather than the normal distribution. With t-SNE, similar data structures in high-dimensional space correspond closely in low-dimensional space, and non-similar data structures correspond at a distance. 
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195012417-4af7ed57-4210-4c34-9f49-87a77339195a.png"></p>  
+
+``` C
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn.manifold import TSNE
+
+def t_sne(args):
+
+    data = pd.read_csv(args.data_path + args.data_type)
+
+    X_data = data.iloc[:, :-1]
+    y_data = data.iloc[:, -1]
+
+    tsne = TSNE(n_components = args.n_components, random_state = args.seed)
+    z = tsne.fit_transform(X_data)
+
+    df = pd.DataFrame()
+    df['y'] = y_data
+    df['comp-1'] = z[:, 0]
+    df['comp-2'] = z[:, 1]
+
+    sns.scatterplot(x="comp-1", y="comp-2", hue=df.y.tolist(),
+                palette=sns.color_palette("hls", len(np.unique(y_data))),
+                data=df).set(title="T-SNE projection")
+
+    plt.show()           
+```    
+
+### Analysis   
+
+![image](https://user-images.githubusercontent.com/115224653/195013305-d42cbe97-717b-41dd-93de-02e003c404e0.png)
