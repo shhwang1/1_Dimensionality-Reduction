@@ -128,67 +128,49 @@ Isomap is an extension of multidimensional scaling (MDS) or principal component 
 2. Calculate the shortest path graph between two points
 3. Building d-dimensional embeddings using the MDS methodology
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195007612-63c37397-88ad-4ae8-ba13-f3555d57a6e9.png"></p>
-
-
-Stepwise selection is a method of deleting variables that are not helpful or adding variables that improve the reference statistics the most among variables missing from the model. Stepwise selection, like Backward Selection, starts with all variables. We call the method of using a regression model using variables selected in Stepwise selection a 'stepwise regression analysis'.      
-
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194992685-38e77aa4-5a6d-44ff-bf3c-c6dcdcaa369c.png"></p>   
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195007612-63c37397-88ad-4ae8-ba13-f3555d57a6e9.png"></p>   
 
 ### Python Code
 
 ``` C
-import pandas as pd
-import statsmodels.api as sm
 import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import numpy as np
 
-variables = X_train.columns.tolist()
-y = y_train
+from sklearn import manifold
+from sklearn.preprocessing import MinMaxScaler
 
-selected_variables = []
-sl_enter = 0.05
-sl_remove = 0.05
+def isomap(args):
 
-sv_per_step = [] 
-adjusted_r_squared = []
-steps = []
-step = 0
-while len(variables) > 0:
-    remainder = list(set(variables) - set(selected_variables))
-    pval = pd.Series(index=remainder) 
-    for col in remainder: 
-        X = X_train[selected_variables+[col]]
-        X = sm.add_constant(X)
-        model = sm.OLS(y,X).fit(disp=0)
-        pval[col] = model.pvalues[col]
+    data = pd.read_csv(args.data_path + args.data_type)
 
-    min_pval = pval.min()
-    if min_pval < sl_enter: 
-        selected_variables.append(pval.idxmin())
-        while len(selected_variables) > 0:
-            selected_X = X_train[selected_variables]
-            selected_X = sm.add_constant(selected_X)
-            selected_pval = sm.OLS(y,selected_X).fit(disp=0).pvalues[1:] 
-            max_pval = selected_pval.max()
-            if max_pval >= sl_remove: 
-                remove_variable = selected_pval.idxmax()
-                selected_variables.remove(remove_variable)
-            else:
-                break
+    X_data = data.iloc[:, :-1]
+    y_data = data.iloc[:, -1]
 
-        step += 1
-        steps.append(step)
-        adj_r_squared = sm.OLS(y,sm.add_constant(X_train[selected_variables])).fit(disp=0).rsquared_adj
-        adjusted_r_squared.append(adj_r_squared)
-        sv_per_step.append(selected_variables.copy())
-    else:
-        break
+    scaler = MinMaxScaler()
+    X_scaled = scaler.fit_transform(X_data)
+
+    isomap = manifold.Isomap(n_components = 2)
+    new_dim = isomap.fit_transform(X_scaled)
+
+    df = pd.DataFrame(new_dim, columns=['X', 'Y'])
+    df['label'] = y_data
+
+    fig = plt.figure()
+    fig.suptitle('Isomap', fontsize=14, fontweight='bold')
+    ax = fig.add_subplot(111)
+
+    for i in np.unique(y_data):
+        plt.scatter(df[df.label == i].X, df[df.label == i].Y, label=i)
+
+    plt.legend(bbox_to_anchor=(1.25, 1))
+    plt.show()
 ``` 
    
 ### Analysis   
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194993825-468b4277-1393-4898-b427-40406b188bc5.png"></p>  
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001408-3a820591-f950-421d-b7c7-3d92c16de865.png"></p> 
+![image](https://user-images.githubusercontent.com/115224653/195009264-3f042d45-01e1-4cc4-bcf5-44116b08de37.png)
 
 ### 4. Genetic Algorithm
 
