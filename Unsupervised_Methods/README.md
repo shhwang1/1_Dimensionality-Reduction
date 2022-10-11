@@ -62,7 +62,7 @@ The code sets the threshold of 'cumulative explained variation' to 0.8, and dete
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001512-3a514f0d-f35c-4f68-9b47-e7ff837d54a3.png"></p>
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195002774-6c889e06-3708-4674-8778-19ee112025ee.png"></p>
 
-The winequality dataset and the diabetes dataset are the optimal points when five principal components, and the Personal Loon dataset is the optimal point when eight principal components.
+The winequality dataset and the diabetes dataset are the optimal points when five principal components, and the PersonalLoan dataset is the optimal point when eight principal components.
 
 ___
 ### 2. Backward selection(elimination)
