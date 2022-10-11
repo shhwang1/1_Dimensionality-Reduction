@@ -76,39 +76,53 @@ Multi-Dimensional Scaling(MDS) addresses scale issues in input states that are e
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195004491-1a0631d5-7f61-4932-9f66-5e3cd14ba802.png"></p>
 
 ### Python Code
-Backward elimination does not differ significantly in code compared to forward selection. It starts with all variables, and compares the variable with the smallest p-value with a threshold and removes it if it is lower.
 
 ``` C
-initial_list = []
-threshold_out = 0.0
-feature_list = X_data.columns.tolist()
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.manifold import MDS
+from sklearn.preprocessing import MinMaxScaler
 
-for num in range(len(feature_list)-1):
-  model = sm.OLS(y_data, sm.add_constant(pd.DataFrame(X_data[included]))).fit(disp=0)
-  # use all coefs except intercept
-  pvalues = model.pvalues.iloc[1:] # P-value of each variable
-  worst_pval = pvalues.max()	# choose variable with best p-value
-  if worst_pval > threshold_out:
-      changed=True
-      worst_feature = pvalues.idxmax()
-      included.remove(worst_feature)
+def mds(args):
 
-  step += 1
-  steps.append(step)        
-  adj_r_squared = sm.OLS(y_data, sm.add_constant(pd.DataFrame(X_data[included]))).fit(disp=0).rsquared_adj
-  adj_r_squared_list.append(adj_r_squared)
-  sv_per_step.append(included.copy())
-``` 
+    data = pd.read_csv(args.data_path + args.data_type)
 
-### Analysis
+    X_data = data.iloc[:, :-1]
+    y_data = data.iloc[:, -1]
+    y_list = np.unique(y_data)
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194547954-87aeeda9-5482-4b59-9e33-a50c3ad1ae4b.png"></p>
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194548316-d3f7e8f7-1505-471e-b430-c64ea7864a60.png"></p>
+    scaler = MinMaxScaler()
+    X_scaled = scaler.fit_transform(X_data)
 
-The initial Step with almost all variables shows a high adjusted-R-square value, but as the step passes, the number of variables decreases and the corresponding figure gradually decreases.   
-In particular, in the last step where only one or two variables remain, it can be seen that the corresponding figure decreases rapidly.   
+    mds = MDS(2,random_state=0)
+    X_2d = mds.fit_transform(X_scaled)
 
-### 3. Stepwise Selection   
+    plt.rcParams['figure.figsize'] = [7, 7]
+    plt.rc('font', size=14)
+    for i in np.unique(y_data):
+        subset = X_2d[y_data == i]
+    
+        x = [row[0] for row in subset]
+        y = [row[1] for row in subset]
+        plt.scatter(x, y, label=i)
+
+    plt.legend()
+    plt.show()
+```    
+
+### Analysis   
+
+We used the MDS of the manifold module in the sklearn package. It was formed as a two-dimensional coordinate system in the existing dimension of each dataset, and the results are shown in the figure below.   
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195006466-723958d1-b286-44af-aa6c-a9723c72540d.png"></p>
+
+Using Multi-Dimensional Scaling, PersonalLoan dataset determined that the two classes were relatively well clustered. However, the Wine Quality dataset and the Diabetes dataset did not cluster so well.   
+
+
+### 3. ISOMAP
+
+https://user-images.githubusercontent.com/115224653/195007612-63c37397-88ad-4ae8-ba13-f3555d57a6e9.png
 
 Stepwise selection is a method of deleting variables that are not helpful or adding variables that improve the reference statistics the most among variables missing from the model. Stepwise selection, like Backward Selection, starts with all variables. We call the method of using a regression model using variables selected in Stepwise selection a 'stepwise regression analysis'.      
 
