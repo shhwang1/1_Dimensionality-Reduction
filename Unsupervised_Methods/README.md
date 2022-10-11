@@ -55,48 +55,9 @@ def pca(args):
 ``` 
 The code sets the threshold of 'cumulative explained variation' to 0.8, and determines the number of components when it exceeds 0.8, as the optimal point.   
 
-``` C
-while len(variables) > 0:
-    remainder = list(set(variables) - set(forward_variables))
-    pval = pd.Series(index=remainder) # P-value
-
-    for col in remainder:
-        X = X_data[forward_variables+[col]]
-        X = sm.add_constant(X)
-        model = sm.OLS(y_data, X).fit(disp = 0)
-        pval[col] = model.pvalues[col]
-
-    min_pval = pval.min()
-
-    if min_pval < sl_enter: # include it if p-value is lower than threshold
-        forward_variables.append(pval.idxmin())
-        while len(forward_variables) > 0:
-            selected_X = X_data[forward_variables]
-            selected_X = sm.add_constant(selected_X)
-            selected_pval = sm.OLS(y_data, selected_X).fit(disp=0).pvalues[1:]
-            max_pval = selected_pval.max()
-
-            if max_pval >= sl_remove:
-                remove_variable = selected_pval.idxmax()
-                forward_variables.remove(remove_variable)
-
-            else:
-                break
-
-        step += 1
-        steps.append(step)
-        adj_r_squared = sm.OLS(y_data, sm.add_constant(X_data[forward_variables])).fit(disp=0).rsquared_adj
-        adj_r_squared_list.append(adj_r_squared)
-        sv_per_step.append(forward_variables.copy())
-
-    else:
-        break
-``` 
-Calculate p_value through the 'statsmodel' package and determine whether to select a variable.
-
 ### Analysis
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194545328-3178119f-1829-4ef6-8878-3305ede7c2c2.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001263-f71d7c03-2fb4-4e36-a546-d9bfdfb96c39.png"></p>
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194545665-c1f44ed6-3e45-4af8-97ed-b5ba84daff97.png"></p>
 
 In all four datasets, the adjusted-r-square value increased as the step went through.   
@@ -200,7 +161,7 @@ while len(variables) > 0:
 ### Analysis   
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194993825-468b4277-1393-4898-b427-40406b188bc5.png"></p>  
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194994126-c1a7ab3f-8c2e-42df-aea1-daeb9cb1369f.png"></p> 
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001408-3a820591-f950-421d-b7c7-3d92c16de865.png"></p> 
 
 ### 4. Genetic Algorithm
 
