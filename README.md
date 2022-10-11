@@ -8,8 +8,8 @@ In recent years, data scientists have been increasingly dealing with data that h
    
 The table of contents is as follows.
 ___
-### Supervised Methods
-
+### [Supervised Methods](https://github.com/shhwang1/1_Dimensionality-Reduction/tree/main/Supervised_Method) 
+ 
 #### 1. Forward Selection   
    
 #### 2. Backward Selection   
