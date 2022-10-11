@@ -220,3 +220,23 @@ score, best_model_index = acc_score(X_data, y_data)
 First, the model with the highest accessibility is selected by using the options of the above 'models'. Accuracy for each model is calculated as shown in the results below. The following results are examples of 'Wine Quality' dataset.   
 
 ![image](https://user-images.githubusercontent.com/115224653/194996083-610bda65-3f36-4b7b-9420-37ccdddc8745.png)
+
+``` C
+def generations(logmodel, size, n_feat, n_parents, mutation_rate, n_gen, X_train, X_test, Y_train, Y_test):
+    best_chromo= []
+    best_score= []
+    population_nextgen=initilization_of_population(size,n_feat)
+    for i in range(n_gen):
+        scores, pop_after_fit = fitness_score(population_nextgen, logmodel, X_train, X_test, Y_train, Y_test)
+        print('Best score in generation',i+1,':',scores[:1])  #2
+        pop_after_sel = selection(pop_after_fit,n_parents)
+        pop_after_cross = crossover(pop_after_sel)
+        population_nextgen = mutation(pop_after_cross,mutation_rate,n_feat)
+        best_chromo.append(pop_after_fit[0])
+        best_score.append(scores[0])
+
+    return best_chromo, best_score
+``` 
+It is the most basic generation code. The logmodel represents the model with the highest Accuracy, and size represents the number of chromosomes. mutation_rate represents the ratio of mutation, and n_gen represents the number of generations.
+
+### Analysis 
