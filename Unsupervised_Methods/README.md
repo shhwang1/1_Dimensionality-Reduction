@@ -60,8 +60,8 @@ The code sets the threshold of 'cumulative explained variation' to 0.8, and dete
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001263-f71d7c03-2fb4-4e36-a546-d9bfdfb96c39.png"></p>
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001512-3a514f0d-f35c-4f68-9b47-e7ff837d54a3.png"></p>
 
-In all four datasets, the adjusted-r-square value increased as the step went through.   
-WineQuality and PersonalLoan datasets are judged to have no meaning in selecting variables as the increasing trend becomes insignificant when passing a specific step.
+abalone dataset already exceeds the threshold of 0.8 when there is one principal component. The winequality dataset and the diabetes dataset are the optimal points when five principal components, and the Personal Loon dataset is the optimal point when eight principal components.
+
 ___
 ### 2. Backward selection(elimination)
 Backward elimination is a way of eliminating meaningless variables. In contrast, it starts with a model with all the variables and move toward a backward that reduces the variables one by one. If you remove one variable, it repeats this process until a significant performance degradation occurs. Below is an image showing the process of reverse removal.
