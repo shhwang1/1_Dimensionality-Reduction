@@ -59,8 +59,8 @@ The code sets the threshold of 'cumulative explained variation' to 0.8, and dete
 
 ### Analysis
 
+<p align="center"><"https://user-images.githubusercontent.com/115224653/195002529-aac1a476-fed6-442c-9694-7f813d629123.png"></p>
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195001512-3a514f0d-f35c-4f68-9b47-e7ff837d54a3.png"></p>
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195002454-422cbf3f-757f-457e-8752-7b6c6c10a332.png"></p>
 
 abalone dataset already exceeds the threshold of 0.8 when there is one principal component. The winequality dataset and the diabetes dataset are the optimal points when five principal components, and the Personal Loon dataset is the optimal point when eight principal components.
 
