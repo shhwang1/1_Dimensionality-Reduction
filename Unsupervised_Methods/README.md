@@ -66,7 +66,7 @@ The winequality dataset is the optimal points when six principal components and 
 
 
 ![image](https://user-images.githubusercontent.com/115224653/195003434-1f0ab6f6-1e1d-4075-af90-e8ca11c470cd.png)
-![image](https://user-images.githubusercontent.com/115224653/195003501-00e7f01b-58c7-4367-b073-f451693e5957.png)
+![image](https://user-images.githubusercontent.com/115224653/195003575-f837a4e8-004a-4147-b0a0-791008183c65.png)
 ![image](https://user-images.githubusercontent.com/115224653/195003099-0cd11afc-6969-4599-a887-08087e056bc0.png)
 
 ___
