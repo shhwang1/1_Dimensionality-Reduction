@@ -116,5 +116,9 @@ In particular, in the last step where only one or two variables remain, it can b
 
 ### 3. Stepwise Selection   
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194992685-38e77aa4-5a6d-44ff-bf3c-c6dcdcaa369c.png"></p>
+Stepwise selection is a method of deleting variables that are not helpful or adding variables that improve the reference statistics the most among variables missing from the model. Stepwise selection, like Backward Selection, starts with all variables. We call the method of using a regression model using variables selected in Stepwise selection a stepwise regression analysis.      
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194992685-38e77aa4-5a6d-44ff-bf3c-c6dcdcaa369c.png"></p>   
+
+
 
