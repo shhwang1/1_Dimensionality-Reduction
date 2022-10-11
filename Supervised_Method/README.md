@@ -171,6 +171,7 @@ while len(variables) > 0:
 ``` 
    
 ### Analysis   
+![image]()
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194993825-468b4277-1393-4898-b427-40406b188bc5.png"></p>  
-<p align="center"><img src="[https://user-images.githubusercontent.com/115224653/194993825-468b4277-1393-4898-b427-40406b188bc5.png](https://user-images.githubusercontent.com/115224653/194994070-0744c128-1070-48d5-ac9d-ff65f4d2beae.png)"></p> 
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194994126-c1a7ab3f-8c2e-42df-aea1-daeb9cb1369f.png.png"></p> 
