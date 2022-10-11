@@ -171,11 +171,16 @@ def isomap(args):
 
 ![image](https://user-images.githubusercontent.com/115224653/195009264-3f042d45-01e1-4cc4-bcf5-44116b08de37.png)
 
-### 4. Genetic Algorithm
+### 4. Locally Linear Embedding (LLE)
 
-Genetic Algorithm is a meta-heuristic technique with a structure in which superior genes survive. This method first sets possible initial solutions for the problem. And we evaluate it and leave solutions that meet certain criteria. In addition, a new solution is created and repeated using the "crossover" process of creating a new solution by crossing two genes and the "mutation" of modifying existing genes. Although it cannot necessarily guarantee the optimal solution, it has the advantage of finding a close solution in a short time.   
+Locally Linear Embedding (LLE) is an algorithm that maps input datasets to a single global coordinate system of low dimensions. The process of LLE can be largely divided into three stages as follows.
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194995273-ec0b4a58-3a61-42e6-92a1-cbeba35f408e.png"></p> 
+1. Step 1) Select neighbors 
+2. Step 2) Reconstruct with linear weights
+3. Step 3) Map to embedded coordinates
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195010814-cc4e4601-2da6-4184-aac7-60c362f6bab5.png"></p>  
+
 
 ``` C
 import numpy as np
