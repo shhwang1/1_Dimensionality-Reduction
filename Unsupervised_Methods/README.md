@@ -1,5 +1,7 @@
 ## Unsupedvised Methods
 
+#### As a result of the superimposed methods, abalone dataset does not fit well, so only 3 datasets are used in unsuperviced methods.
+
 ### 1. Principal Component Analysis (PCA)
 
 PCA is a technique of summarizing and abbreviating new variables made of a linear combination of several highly correlated variables. PCA finds a new orthogonal basis while preserving the variance of the data as much as possible. After that, the sampling of the high-dimensional space is converted into a low-dimensional space with no linear association. Simply, the dimension is reduced by finding the axis of the data with the highest variance, which is the main component of PCA.
