@@ -70,8 +70,8 @@ The winequality dataset is the optimal points when six principal components and 
 ![image](https://user-images.githubusercontent.com/115224653/195003099-0cd11afc-6969-4599-a887-08087e056bc0.png)
 
 ___
-### 2. Backward selection(elimination)
-Backward elimination is a way of eliminating meaningless variables. In contrast, it starts with a model with all the variables and move toward a backward that reduces the variables one by one. If you remove one variable, it repeats this process until a significant performance degradation occurs. Below is an image showing the process of reverse removal.
+### 2. Multi-Dimensional Scaling (MDS)
+Multi-Dimensional Scaling(MDS) addresses scale issues in input states that are essentially outputless. Given a distance matrix D defined between all points in the existing dimension space, the inner matrix B is used to create a coordinate system y space. The most important point of MDS is that it preserves the distance information between all points.   
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/194546699-e94c37d7-024e-446c-bacd-55556f56a91b.png"></p>
 <p align="center">https://quantifyinghealth.com/ Oct 07, 2022</p>
