@@ -2,9 +2,9 @@
 
 ### 1. Principal Component Analysis (PCA)
 
-PCA is a technique of summarizing and abbreviating new variables made of a linear combination of several highly correlated variables. PCA finds a new orthogonal basis while preserving the variance of the data as much as possible. And then it transforms samples of high-dimensional space into low-dimensional space with no linear association. Simply, we find the axis of the data with the highest variance and reduce the dimension, which is the main component of PCA.
+Before we start, we need to know 'Wrapper'. 'Wrapper' is a supervised learning-based dimensionality reduction method that uses repeated algorithms. The Wrapper method includes Forward selection, Backward selection(elimination), Stepwise selection, and Genetic algotirithms. The first of these, 'Forward selection', is the way to find the most significant variables. Start with no vairables and move forward to increase the variables. Each step selects the best performing variable and runs it until there is no significant variables.
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194999981-01e2c48c-7f02-4fb8-b63e-8ca43c7e9e2e.png" width="600" height="600"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194999981-01e2c48c-7f02-4fb8-b63e-8ca43c7e9e2e.png" width="800" height="450"></p>
 <p align="center">https://quantifyinghealth.com/ Oct 07, 2022</p>
 
 ### Python Code
