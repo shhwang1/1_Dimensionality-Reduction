@@ -181,104 +181,47 @@ Locally Linear Embedding (LLE) is an algorithm that maps input datasets to a sin
 
 <p align="center"><img src="https://user-images.githubusercontent.com/115224653/195010814-cc4e4601-2da6-4184-aac7-60c362f6bab5.png"></p>  
 
-
+### Python Code
 ``` C
 import numpy as np
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
-from random import randint
-from sklearn import svm
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn import metrics
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import KFold, cross_val_score
-from sklearn.model_selection import train_test_split
-import warnings
+import pandas as pd
 
-classifiers = ['LinearSVM', 'RadialSVM', 
-               'Logistic',  'RandomForest', 
-               'AdaBoost',  'DecisionTree', 
-               'KNeighbors','GradientBoosting']
+from sklearn.manifold import LocallyLinearEmbedding
+from sklearn.preprocessing import MinMaxScaler
 
-models = [svm.SVC(kernel='linear'),
-          svm.SVC(kernel='rbf'),
-          LogisticRegression(max_iter = 1000),
-          RandomForestClassifier(n_estimators=200, random_state=0),
-          AdaBoostClassifier(random_state = 0),
-          DecisionTreeClassifier(random_state=0),
-          KNeighborsClassifier(),
-          GradientBoostingClassifier(random_state=0)]
-          
-score, best_model_index = acc_score(X_data, y_data)
-    print(score)
-    print('Starting Genetic-Algorithm with', classifiers[best_model_index])
+def lle(args):
+
+    data = pd.read_csv(args.data_path + args.data_type)
+
+    X_data = data.iloc[:, :-1]
+    y_data = data.iloc[:, -1]
+    # scaler = MinMaxScaler()
+    # X_scaled = scaler.fit_transform(X_data)
+
+    lle = LocallyLinearEmbedding(n_neighbors=args.n_neighbors,
+                            n_components = args.n_components,
+                            eigen_solver = 'auto',
+                            method='standard',)
+    mds_x = lle.fit_transform(X_data)
+
+    plt.figure(figsize=(10,10))
+    for i in range(10):
+        plt.scatter(mds_x[y_data==i][:,0],
+                    mds_x[y_data==i][:,1],
+                    label = i)
+        plt.legend()
+    plt.title("LLE")    
+    plt.show()            
 ``` 
-First, the model with the highest accessibility is selected by using the options of the above 'models'. Accuracy for each model is calculated as shown in the results below. The following results are examples of 'Wine Quality' dataset.   
-
-![image](https://user-images.githubusercontent.com/115224653/194996083-610bda65-3f36-4b7b-9420-37ccdddc8745.png)
-
-``` C
-def generations(logmodel, size, n_feat, n_parents, mutation_rate, n_gen, X_train, X_test, Y_train, Y_test):
-    best_chromo= []
-    best_score= []
-    population_nextgen=initilization_of_population(size,n_feat)
-    for i in range(n_gen):
-        scores, pop_after_fit = fitness_score(population_nextgen, logmodel, X_train, X_test, Y_train, Y_test)
-        print('Best score in generation',i+1,':',scores[:1])  #2
-        pop_after_sel = selection(pop_after_fit,n_parents)
-        pop_after_cross = crossover(pop_after_sel)
-        population_nextgen = mutation(pop_after_cross,mutation_rate,n_feat)
-        best_chromo.append(pop_after_fit[0])
-        best_score.append(scores[0])
-
-    return best_chromo, best_score
-``` 
-It is the most basic generation code. The logmodel represents the model with the highest Accuracy, and size represents the number of chromosomes. mutation_rate represents the ratio of mutation, and n_gen represents the number of generations.   
-
-``` C
-def selection(pop_after_fit,n_parents):
-    population_nextgen = []
-    for i in range(n_parents):
-        population_nextgen.append(pop_after_fit[i])
-    return population_nextgen
-
-
-def crossover(pop_after_sel):
-    pop_nextgen = pop_after_sel
-    for i in range(0,len(pop_after_sel),2):
-        new_par = []
-        child_1 , child_2 = pop_nextgen[i] , pop_nextgen[i+1]
-        new_par = np.concatenate((child_1[:len(child_1)//2],child_2[len(child_1)//2:]))
-        pop_nextgen.append(new_par)
-    return pop_nextgen
-
-
-def mutation(pop_after_cross, mutation_rate,n_feat):   
-    mutation_range = int(mutation_rate*n_feat)
-    pop_next_gen = []
-    for n in range(0,len(pop_after_cross)):
-        chromo = pop_after_cross[n]
-        rand_posi = [] 
-        for i in range(0,mutation_range):
-            pos = randint(0,n_feat-1)
-            rand_posi.append(pos)
-        for j in rand_posi:
-            chromo[j] = not chromo[j]  
-        pop_next_gen.append(chromo)
-    return pop_next_gen
-```    
 
 ### Analysis 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194998098-abf8b436-46b5-44dd-9b97-17b5c20b0bd4.png"></p>   
+![image](https://user-images.githubusercontent.com/115224653/195011804-dbea6f81-614a-4f81-87b0-5251389a4fc2.png)
 
-Looking at the results, it seems that abalone dataset and Diabetes dataset using RadialSVM are not fitted to the genetic algorithm. Therefore, for the two datasets, RadialSVM was excluded from 'models' and re-experimented.   
 
-<p align="center"><img src="https://user-images.githubusercontent.com/115224653/194999133-8e521a26-099d-46cb-b1ea-b95adfbf628d.png"></p>   
+### 5. t-Distributed Stochastic Neighbor Embedding (t-SNE)
 
-abalone dataset has very low performance of accuracy and GA-performance compared to other dataset. Personally, it is assumed that the performance will be relatively low because there are 29 classes(y-data) in the dataset.
+t-Distributed Stochastic Neighbor Embedding(t-SNE) is one of manifold learning and aims at visualizing complex data. Visualize high-dimensional data by shrinking it to two or three dimensions. t-SNE is characterized by utilizing the t-distribution rather than the normal distribution. With t-SNE, similar data structures in high-dimensional space correspond closely in low-dimensional space, and non-similar data structures correspond at a distance. 
+
+<p align="center"><img src="https://user-images.githubusercontent.com/115224653/195012417-4af7ed57-4210-4c34-9f49-87a77339195a.png"></p>  
