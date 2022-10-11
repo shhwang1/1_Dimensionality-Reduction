@@ -21,6 +21,6 @@ def Parser1():
     
     # Locally Linear Embedding (LLE)
     parser.add_argument('--n-components', type=int, default = 2)
-    parser.add_argument('--n-neighbors', type=int, default = 3)
+    parser.add_argument('--n-neighbors', type=int, default = 20)
     
     return parser
