@@ -127,56 +127,45 @@ import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 
-from sklearn.model_selection import train_test_split   
+variables = X_train.columns.tolist()
+y = y_train
 
-def stepwise_selection(args):
-    data = pd.read_csv(args.data_path + args.data_type)
+selected_variables = []
+sl_enter = 0.05
+sl_remove = 0.05
 
-    X_data = data.iloc[:, :-1]
-    y_data = data.iloc[:, -1]
+sv_per_step = [] 
+adjusted_r_squared = []
+steps = []
+step = 0
+while len(variables) > 0:
+    remainder = list(set(variables) - set(selected_variables))
+    pval = pd.Series(index=remainder) 
+    for col in remainder: 
+        X = X_train[selected_variables+[col]]
+        X = sm.add_constant(X)
+        model = sm.OLS(y,X).fit(disp=0)
+        pval[col] = model.pvalues[col]
 
-    X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size = args.split_size, shuffle=True, random_state = args.seed)
+    min_pval = pval.min()
+    if min_pval < sl_enter: 
+        selected_variables.append(pval.idxmin())
+        while len(selected_variables) > 0:
+            selected_X = X_train[selected_variables]
+            selected_X = sm.add_constant(selected_X)
+            selected_pval = sm.OLS(y,selected_X).fit(disp=0).pvalues[1:] 
+            max_pval = selected_pval.max()
+            if max_pval >= sl_remove: 
+                remove_variable = selected_pval.idxmax()
+                selected_variables.remove(remove_variable)
+            else:
+                break
 
-    variables = X_train.columns.tolist()
-    y = y_train ## 반응 변수
-
-    selected_variables = []
-    sl_enter = 0.05
-    sl_remove = 0.05
-    
-    sv_per_step = [] 
-    adjusted_r_squared = []
-    steps = []
-    step = 0
-    while len(variables) > 0:
-        remainder = list(set(variables) - set(selected_variables))
-        pval = pd.Series(index=remainder) 
-        for col in remainder: 
-            X = X_train[selected_variables+[col]]
-            X = sm.add_constant(X)
-            model = sm.OLS(y,X).fit(disp=0)
-            pval[col] = model.pvalues[col]
-    
-        min_pval = pval.min()
-        if min_pval < sl_enter: 
-            selected_variables.append(pval.idxmin())
-            while len(selected_variables) > 0:
-                selected_X = X_train[selected_variables]
-                selected_X = sm.add_constant(selected_X)
-                selected_pval = sm.OLS(y,selected_X).fit(disp=0).pvalues[1:] 
-                max_pval = selected_pval.max()
-                if max_pval >= sl_remove: 
-                    remove_variable = selected_pval.idxmax()
-                    selected_variables.remove(remove_variable)
-                else:
-                    break
-            
-            step += 1
-            steps.append(step)
-            adj_r_squared = sm.OLS(y,sm.add_constant(X_train[selected_variables])).fit(disp=0).rsquared_adj
-            adjusted_r_squared.append(adj_r_squared)
-            sv_per_step.append(selected_variables.copy())
-        else:
-            break
-
+        step += 1
+        steps.append(step)
+        adj_r_squared = sm.OLS(y,sm.add_constant(X_train[selected_variables])).fit(disp=0).rsquared_adj
+        adjusted_r_squared.append(adj_r_squared)
+        sv_per_step.append(selected_variables.copy())
+    else:
+        break
 ``` 
